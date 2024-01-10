@@ -1,3 +1,5 @@
+# where are models that i can use in my database
+
 from django.db import models
 
 
