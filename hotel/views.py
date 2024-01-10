@@ -1,3 +1,5 @@
+#Here are functions for displaying templates and forms on the site
+
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.urls import reverse_lazy, reverse
