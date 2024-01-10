@@ -1,0 +1,56 @@
+{% extends 'hotel/base.html' %}
+
+{% block title %}
+	Person #{{ person.pk }}
+{% endblock %}
+
+{% block style %}
+	.main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    footer > div {
+        margin: 10px
+    }
+
+    .buttons {
+        margin: 0 10px
+    }
+
+{% endblock %}
+
+{% block body %}
+    <section class="main">
+        <h1 style="margin-top: 50px">Person: <strong>{{ person.name }}</strong></h1>
+        <div class="base_flex">
+            <div class="base_flex"><p style="font-weight: bold; margin: 0">Name</p><p>{{ person.name }}</p></div>
+            <div class="base_flex"><p style="font-weight: bold; margin: 0">Surname</p><p>{{ person.surname }}</p></div>
+            <div class="base_flex"><p style="font-weight: bold; margin: 0">PESEL</p><p>{{ person.pesel }}</div>
+            <div class="base_flex"><p style="font-weight: bold; margin: 0">Sex</p><p>{{ person.sex }}</div>
+        </div>
+    </section>
+    <footer class="main">
+        {% if user.is_active and user.is_superuser %}
+            <div style="display: flex; justify-content: center; align-items: center; flex-direction: row">
+                <div>
+                    <form action="{% url 'hotel:person_update' pk=person.pk %}">
+                        <button class="btn btn-primary buttons">Update data of person</button>
+                    </form>
+                </div>
+                <div>
+                    <form action="{% url 'hotel:person_delete' pk=person.pk %}">
+                        <button class="btn btn-danger buttons">Delete person</button>
+                    </form>
+                </div>
+            </div>   
+        {% endif %}
+        <div>
+            <form action="{% url 'hotel:person_list' %}">
+                <button class="btn btn-secondary">Back to person list</button>
+            </form>
+        </div>
+    </footer>
+{% endblock %}

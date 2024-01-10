@@ -1,0 +1,48 @@
+{% extends 'hotel/base.html' %}
+
+{% block title %}
+	Main menu
+{% endblock %}
+
+
+
+{% block body %}
+    <section style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin: 50px">
+        <h1 style="font-weight: bold">Welcome to Hotel 1cT</h1>
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <div style="margin: 50px">
+                <h3>This is the best hotel that you have ever seen</h3>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; flex-direction: row">
+                <div style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+                    <div style="margin: 20px; width: 500px; height: 150px; position: relative; background: #FAFAF5; border-radius: 24px; overflow: hidden; border: 2px #E6E6E6 solid; display: flex; align-items: center; flex-direction: column; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);">
+                        <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height: 100%">
+                            <h2 style="font-weight: bold">Rooms in the system</h2>
+                            <h3>{{ hotels|length }}</h3>
+                        </div>
+                    </div>
+                    <div style="margin: 20px; width: 500px; height: 150px; position: relative; background: #FAFAF5; border-radius: 24px; overflow: hidden; border: 2px #E6E6E6 solid; display: flex; align-items: center; flex-direction: column; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);">
+                        <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height: 100%">
+                            <h2 style="font-weight: bold">Persons in the system</h2>
+                            <h3>{{ persons|length }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="margin: 20px; width: 500px; height: 150px; position: relative; background: #FAFAF5; border-radius: 24px; overflow: hidden; border: 2px #E6E6E6 solid; display: flex; align-items: center; flex-direction: column; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);">
+                        <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height: 100%">
+                            <h2 style="font-weight: bold">Free rooms</h2>
+                            <h3>{{ free_rooms }}</h3>
+                        </div>
+                    </div>
+                    <div style="margin: 20px; width: 500px; height: 150px; position: relative; background: #FAFAF5; border-radius: 24px; overflow: hidden; border: 2px #E6E6E6 solid; display: flex; align-items: center; flex-direction: column; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);">
+                        <div style="display: flex; align-items: center; justify-content: center; flex-direction: column; height: 100%">
+                            <h2 style="font-weight: bold">Occupied rooms</h2>
+                            <h3>{{ not_free_rooms }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

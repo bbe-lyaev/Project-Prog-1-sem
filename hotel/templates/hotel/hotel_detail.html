@@ -1,0 +1,58 @@
+{% extends 'hotel/base.html' %}
+
+{% block title %}
+	Person #{{ person.pk }}
+{% endblock %}
+
+{% block style %}
+	.main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    footer > div {
+        margin: 10px
+    }
+
+    .buttons {
+        margin: 10px 0
+    }
+
+{% endblock %}
+
+{% block body %}
+    <section class="main">
+        <h1 style="margin: 50px 0 0">Room <strong>№{{ room.pk }}</strong></h1>
+        <div class="base_flex">
+            <h2 style="font-weight: bold; margin: 30px 0 10px">Residents</h2>
+            {% if room.room.all %}
+                {% for person in room.room.all %}
+                    <div class="base_flex"><p style="font-weight: bold; margin: 0">Person №{{ person.pk }}</p><a style="margin: 0 0 10px" href="{% url 'hotel:person_detail' pk=person.pk %}">{{ person.name }}</a></div>
+                {% endfor %}
+            {% else %}
+                <p>No persons yet</p>
+            {% endif %}
+            <h2 style="font-weight: bold; margin: 30px 0 10px">Other information</h2>
+            <div class="base_flex"><p style="font-weight: bold; margin: 0">Persons in the room</p><p style="margin: 0 0 10px">{{ room.room.all|length }}</p></div>
+            <div class="base_flex"><p style="font-weight: bold; margin: 0">Max persons in the room</p><p style="margin: 0 0 10px">{{ room.max_persons }}</p></div>
+        </div>
+    </section>
+    <footer class="main">
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+            {% if user.is_active and user.is_superuser %}
+                <div>
+                    <form action="{% url 'hotel:hotel_update' pk=room.pk %}">
+                            <button class="btn btn-primary buttons">Update data of room</button>
+                    </form>
+                </div>
+            {% endif %}
+            <div>
+                <form action="{% url 'hotel:hotel_list' %}">
+                    <button class="btn btn-secondary buttons">Back to rooms list</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

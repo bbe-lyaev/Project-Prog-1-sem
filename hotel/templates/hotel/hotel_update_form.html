@@ -1,0 +1,78 @@
+{% extends 'hotel/base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+    Create Person
+{% endblock %}
+
+{% block style %}
+	form > div.form-check-input {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        border: none;
+    }
+{% endblock %}
+
+{% block head %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkboxes = document.querySelectorAll('[name="room"]');
+        const maxPersonsInput = document.getElementById('id_max_persons');
+
+        function checkMaxSelection() {
+            let maxAllowed = parseInt(maxPersonsInput.value, 10) || 0;
+            let checkedCount = 0;
+
+            checkboxes.forEach(function (item) {
+                if (item.checked) {
+                    checkedCount++;
+                }
+            });
+
+            if (checkedCount > maxAllowed) {
+                this.checked = false;
+                alert('Max selected: ' + maxAllowed);
+            }
+        }
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', checkMaxSelection);
+        });
+
+        maxPersonsInput.addEventListener('input', function () {
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = false;
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container mt-4">
+            <h1 class="text-center">Update room №{{ hotel.pk }}</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-6" style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+                    <form method="POST" style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success">
+                            Update
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col text-center" style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+                    <form action="{% url 'hotel:hotel_list' %}">
+                        <button class="btn btn-secondary">Return to hotel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

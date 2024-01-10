@@ -1,0 +1,23 @@
+{%  extends 'hotel/base.html' %}
+
+{% block title %}
+	Confirm delete {{ object.name }}
+{% endblock %}
+
+{% block body %}
+    <section style="display: flex; justify-content: center; align-items: center; flex-direction: column">
+        <h1 style="margin: 50px">Are you sure you want to delete person №{{ object.pk }}?</h1>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-danger" style="margin: 10px">Delete</button>
+            </form>
+        </div>
+        <div>
+            <form action="{% url 'hotel:person_detail' pk=object.pk %}">
+                <button class="btn btn-secondary" style="margin: 10px">Back to product</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}

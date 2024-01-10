@@ -1,0 +1,43 @@
+
+{% extends 'hotel/base.html' %}
+{% load static %}
+
+{% block title %}
+    Product list
+{% endblock %}
+
+{% block style %}
+	.info {
+        margin: 0 5%
+    }
+{% endblock %}
+
+{% block body %}
+        <section style="justify-content: space-evenly; align-items: center; display: flex; flex-direction:row; flex-wrap:wrap;">
+            {% if persons %}
+                {% for person in persons %}
+                        <div style="margin: 50px; width: 400px; height: 650px; position: relative; background: #FAFAF5; border-radius: 24px; overflow: hidden; border: 2px #E6E6E6 solid; display: flex; justify-content: center; align-items: center; flex-direction: column; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);">
+                            <div style="display: flex; justify-content: center; align-items: center; margin: 20px auto">
+                                <div style="color: black; font-size: 30px; font-weight: 600; line-height: 39px; word-wrap: break-word"><a href="{% url 'hotel:person_detail' pk=person.pk %}">Person №{{ person.pk }}</a></div>
+                            </div>
+                            <img src="{% static 'images/person.jpg' %}" width=100%>
+                            <div style="margin: 20px; color: black; font-size: 20px; font-weight: 600; line-height: 32.50px; word-wrap: break-word">Name: {{ person.name }}</div>
+                            <div style="margin: 20px; color: black; font-size: 20px; font-weight: 600; line-height: 32.50px; word-wrap: break-word">Surname: {{ person.surname }}</div>
+                            <div style="margin: 20px; color: black; font-size: 20px; font-weight: 600; line-height: 32.50px; word-wrap: break-word">PESEL: {{ person.pesel }}</div>
+                            <div style="margin: 20px; color: black; font-size: 20px; font-weight: 600; line-height: 32.50px; word-wrap: break-word">Sex: {{ person.sex }}</div>
+                        </div>
+                {% endfor %}
+            {% else %}
+                <h3>No persons yet</h3>
+            {% endif %}
+        </section>
+        <footer style="display: flex; justify-content: space-evenly; align-items: center; flex-direction: column; margin: 50px 0">
+            {% if user.is_active and user.is_superuser %}
+            	<div>
+                    <form action="{% url 'hotel:create_new_person' %}">
+                        <button style="margin: 15px 0" class="btn btn-primary">Create a new person</button>
+                    </form>
+                </div>
+            {% endif %}
+        </footer>
+{% endblock %}
