@@ -11,3 +11,7 @@
 5. After that in your browser write 127.0.0.1:8000
 
 ## Congatilations, you on this site 🎉🎉🎉
+
+If you want to add and redact persons you need to login:
+Username: admin
+Password: admin
