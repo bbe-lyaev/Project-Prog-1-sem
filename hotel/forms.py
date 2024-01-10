@@ -1,3 +1,5 @@
+# where forms to a site with fields and functions
+
 from django import forms
 
 from hotel.models import Person, Hotel
