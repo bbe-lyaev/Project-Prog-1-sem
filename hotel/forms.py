@@ -1,4 +1,4 @@
-# where forms to a site with fields and functions
+# Here are forms to a site with fields and functions
 
 from django import forms
 
