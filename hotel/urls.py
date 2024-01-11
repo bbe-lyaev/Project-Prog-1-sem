@@ -1,4 +1,4 @@
-#where are urls for a site
+#Here are urls for a site
 
 from django.urls import path
 
